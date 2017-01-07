@@ -128,3 +128,20 @@ function ranDom(arr) {
   var index = Math.floor(Math.random()*arr.length);
   return arr[index];
 }
+
+// REPLY-ON-DAY-X ============================
+// 
+
+// 
+//  search twitter for all tweets containing the word 'banana' since July 11, 2011 
+// 
+var todayDate = new Date().toISOString().slice(0,10);
+Twitter.get('search/tweets', { q: '"#100DaysOfCode" "Day 1" since:' + todayDate, count: 100 }, function(err, data, response) {
+  console.log(data);
+});
+
+// var stream = T.stream('statuses/filter', { track: 'mango' })
+ 
+// stream.on('tweet', function (tweet) {
+//   console.log(tweet)
+// })
