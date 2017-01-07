@@ -1,12 +1,17 @@
 /**
  * DEPENDENCIES
  */
-var twit = require('twit');
-var config = require('./config');
+var twit = require('twit'),
+    config = require('./config'),
+    uniqueRandomArray = require('unique-random-array');
 
 var Twitter = new twit(config);
 
-var queryString = '#100DaysOfCode, #100daysofcode';
+// use random array 
+var queryString = uniqueRandomArray([
+    '#100DaysOfCode',
+    '#100daysofcode'
+]);
 
 // Console Welcome Msg
 console.log('Welcome to #100DaysOfCode');
@@ -15,7 +20,7 @@ console.log('Welcome to #100DaysOfCode');
 // find latest tweets according to #100daysofcode
 var retweet = function () {
   var params = {
-    q: queryString,
+    q: queryString(),
     result_type: 'recent',
     lang: 'en'
   };
@@ -53,7 +58,7 @@ setInterval(retweet, 360000);
 // find a random tweet using querySring and 'favorite' it
 var favoriteTweet = function () {
   var params = {
-    q          : queryString,
+    q          : queryString(),
     result_type: 'recent',
     lang       : 'en'
   };
