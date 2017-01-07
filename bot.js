@@ -132,16 +132,23 @@ function ranDom(arr) {
 // REPLY-ON-DAY-X ============================
 // 
 
-// 
-//  search twitter for all tweets containing the word 'banana' since July 11, 2011 
-// 
+//  search twitter for all tweets containing the keywords
 var todayDate = new Date().toISOString().slice(0,10);
 Twitter.get('search/tweets', { q: '"#100DaysOfCode" "Day 1" since:' + todayDate, count: 100 }, function(err, data, response) {
-  console.log(data);
+  
+  for (var key in data) {
+    // skip loop if the property is from prototype
+    if (!data.hasOwnProperty(key)) continue;
+  
+    var obj = data[key];
+    for (var prop in obj) {
+        // skip loop if the property is from prototype
+        if(!obj.hasOwnProperty(prop)) continue;
+  
+        // your code
+        console.log(prop + " = " + obj[prop]);
+    }
+  }
+  
 });
 
-// var stream = T.stream('statuses/filter', { track: 'mango' })
- 
-// stream.on('tweet', function (tweet) {
-//   console.log(tweet)
-// })
